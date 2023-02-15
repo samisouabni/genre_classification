@@ -68,8 +68,9 @@ def go(config: DictConfig):
             os.path.join(root_path, "segregate"),
             "main",
             parameters={
-                "input_artifact": "preprocessed_data.csv",
+                "input_artifact": "preprocessed_data.csv:latest",
                 "artifact_root": "preprocessed_data",
+                "artifact_type": "raw_data",
                 "test_size": config["data"]["test_size"],
                 "random_state": config["random_forest_pipeline"]["random_forest"]["random_state"],
                 "stratify": config["data"]["stratify"]
@@ -88,7 +89,7 @@ def go(config: DictConfig):
             os.path.join(root_path, "random_forest"),
             "main",
             parameters={
-                "train_data": "preprocessed_data.csv",
+                "train_data": "preprocessed_data.csv:latest",
                 "model_config": model_config,
                 "export_artifact": config["random_forest_pipeline"]["export_artifact"],
                 "random_seed": config["main"]["random_seed"],
@@ -99,8 +100,14 @@ def go(config: DictConfig):
 
     if "evaluate" in steps_to_execute:
 
-        ## YOUR CODE HERE: call the evaluate step
-        pass
+        _ = mlflow.run(
+            os.path.join(root_path, "evaluate"),
+            "main",
+            parameters={
+                "model_export": "model_export:latest",
+                "test_data": "preprocessed_data.csv:latest"
+            },
+        )
 
 
 if __name__ == "__main__":
