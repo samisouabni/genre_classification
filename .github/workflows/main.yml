@@ -23,6 +23,8 @@ jobs:
           auto-activate-base: true
           activate-environment: ""
       - name: install mlflow
+        shell: bash
         run: pip install mlflow
       - name: run mlflow
+        shell: bash
         run: mlflow run . -P "main.execute_steps='${{matrix.Step}}'"
