@@ -8,6 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v3.2.5
+        with:
+          # A list of files, directories, and wildcard patterns to cache and restore
+          path: /usr/share/miniconda
+          # An explicit key for restoring and saving the cache
+          key: miniconda
       - uses: conda-incubator/setup-miniconda@v2
         with:
           auto-activate-base: true
