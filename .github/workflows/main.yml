@@ -6,9 +6,9 @@ jobs:
   run:
     name: Run MLFlow
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        Step: [download,preprocess,check_data,segregate,random_forest,evaluate]
+#     strategy:
+#       matrix:
+#         Step: [download,preprocess,check_data,segregate,random_forest,evaluate]
     steps:
       - uses: actions/checkout@v2
       - name: Cache
@@ -37,5 +37,5 @@ jobs:
         run: pip install mlflow
       - name: run mlflow
         shell: bash
-        run: mlflow run . -P "main.execute_steps='${{matrix.Step}}'"
+        run: mlflow run . # -P "main.execute_steps='${{matrix.Step}}'"
         continue-on-error: true
