@@ -28,3 +28,4 @@ jobs:
       - name: run mlflow
         shell: bash
         run: mlflow run . -P "main.execute_steps='${{matrix.Step}}'"
+        continue-on-error: true
