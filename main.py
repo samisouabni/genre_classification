@@ -20,7 +20,7 @@ def go(config: DictConfig):
         # This was passed on the command line as a comma-separated list of steps
         steps_to_execute = config["main"]["execute_steps"].split(",")
     else:
-        assert isinstance(config["main"]["execute_steps"], list)
+        #assert isinstance(config["main"]["execute_steps"], list)
         steps_to_execute = config["main"]["execute_steps"]
 
     # Download step
@@ -43,7 +43,7 @@ def go(config: DictConfig):
             os.path.join(root_path, "preprocess"),
             "main",
             parameters={
-                "input_artifact": config['main']['project_name'] + "/raw_data.parquet:latest",
+                "input_artifact": config["main"]["project_name"] + "/raw_data.parquet:latest",
                 "artifact_name": "preprocessed_data.csv",
                 "artifact_type": "preprocessed_data",
                 "artifact_description": "Data as preprocessed"
@@ -56,8 +56,8 @@ def go(config: DictConfig):
             os.path.join(root_path, "check_data"),
             "main",
             parameters={
-                "reference_artifact": config['main']['project_name'] + "/raw_data.parquet:latest",
-                "sample_artifact": config['main']['project_name'] + "/preprocessed_data.csv:latest",
+                "reference_artifact": config["data"]["reference_dataset"],
+                "sample_artifact": "preprocessed_data.csv:latest",
                 "ks_alpha": config["data"]["ks_alpha"]
             },
         )
