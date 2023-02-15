@@ -5,7 +5,8 @@ on: push
 jobs:
   run:
     name: Run MLFlow
-    runs-on: continuumio/miniconda3
+    runs-on: ubuntu-latest
+    container: continuumio/miniconda3
 #     strategy:
 #       matrix:
 #         Step: [download,preprocess,check_data,segregate,random_forest,evaluate]
