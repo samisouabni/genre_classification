@@ -22,7 +22,7 @@ jobs:
 #         run: source "/usr/share/miniconda/etc/profile.d/conda.sh"
       - name: install mlflow
         shell: bash -el {0}
-        run: pip install mlflow wandb
+        run: conda install mlflow wandb
       - name: run mlflow
         shell: bash -el {0}
         run: mlflow run . # -P "main.execute_steps='${{matrix.Step}}'"
