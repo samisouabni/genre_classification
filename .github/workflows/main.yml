@@ -22,9 +22,16 @@ jobs:
         with:
           auto-activate-base: true
           activate-environment: ""
-      - name: get conda info
+          
+      - name: get miniconda content
         shell: bash
-        run: source "~/$$(conda info | grep -i 'base environment')/etc/profile.d/conda.sh"
+        run: ls "/usr/share/miniconda"
+      - name: get condabin content
+        shell: bash
+        run: ls "/usr/share/miniconda/condabin"
+      - name: source conda
+        shell: bash
+        run: source "/usr/share/miniconda/condabin/etc/profile.d/conda.sh"
       - name: install mlflow
         shell: bash
         run: pip install mlflow
