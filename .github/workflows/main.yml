@@ -26,9 +26,9 @@ jobs:
       - name: get miniconda content
         shell: bash
         run: ls "/usr/share/miniconda"
-      - name: get condabin content
+      - name: get etc content
         shell: bash
-        run: ls "/usr/share/miniconda/condabin"
+        run: ls "/usr/share/miniconda/etc"
       - name: source conda
         shell: bash
         run: source "/usr/share/miniconda/condabin/etc/profile.d/conda.sh"
