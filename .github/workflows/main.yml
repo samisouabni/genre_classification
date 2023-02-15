@@ -11,11 +11,6 @@ jobs:
 #         Step: [download,preprocess,check_data,segregate,random_forest,evaluate]
     steps:
       - uses: actions/checkout@v2
-      - name: Cache
-        uses: actions/cache@v3.2.5
-        with:
-          path: /usr/share/miniconda
-          key: miniconda
       - uses: conda-incubator/setup-miniconda@v2
         with:
           auto-activate-base: true
@@ -26,7 +21,7 @@ jobs:
         run: source "/usr/share/miniconda/etc/profile.d/conda.sh"
       - name: install mlflow
         shell: bash -el {0}
-        run: pip install mlflow
+        run: pip install mlflow wandb
       - name: run mlflow
         shell: bash -el {0}
         run: mlflow run . # -P "main.execute_steps='${{matrix.Step}}'"
