@@ -2,3 +2,5 @@ mlruns
 outputs
 .ipynb_checkpoints
 wandb
+__pycache__
+artifacts
