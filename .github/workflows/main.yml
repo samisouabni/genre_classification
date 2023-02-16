@@ -23,10 +23,9 @@ jobs:
 #       - name: source conda
 #         shell: bash -el {0}
 #         run: source "/usr/share/miniconda/etc/profile.d/conda.sh"
-      - name: install mlflow
-        run: conda activate base && pip install mlflow wandb
-      - name: wandb login
-        run: wandb login ${{ secrets.WANDB_API_KEY }}
       - name: run mlflow
-        run: conda activate base && mlflow run . # -P "main.execute_steps='${{ matrix.Step }}'"
-        continue-on-error: true
+        run: >-
+          conda activate base
+          pip install mlflow wandb
+          wandb login ${{ secrets.WANDB_API_KEY }}
+          mlflow run .
