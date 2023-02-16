@@ -7,6 +7,9 @@ jobs:
     name: Run MLFlow
     runs-on: ubuntu-latest
     container: continuumio/miniconda3
+    defaults:
+      run:
+        shell: bash -el {0}
 #     strategy:
 #       matrix:
 #         Step: [download,preprocess,check_data,segregate,random_forest,evaluate]
@@ -21,9 +24,7 @@ jobs:
 #         shell: bash -el {0}
 #         run: source "/usr/share/miniconda/etc/profile.d/conda.sh"
       - name: install mlflow
-        shell: bash -el {0}
         run: conda activate base && pip install mlflow wandb
       - name: run mlflow
-        shell: bash -el {0}
         run: conda activate base && mlflow run . # -P "main.execute_steps='${{matrix.Step}}'"
         continue-on-error: true
