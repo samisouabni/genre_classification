@@ -26,7 +26,7 @@ jobs:
       - name: install mlflow
         run: conda activate base && pip install mlflow wandb
       - name: wandb login
-        run: echo ${{wandb_api_key}} | wandb login
+        run: wandb login ${{ secrets.WANDB_API_KEY }}
       - name: run mlflow
-        run: conda activate base && mlflow run . # -P "main.execute_steps='${{matrix.Step}}'"
+        run: conda activate base && mlflow run . # -P "main.execute_steps='${{ matrix.Step }}'"
         continue-on-error: true
